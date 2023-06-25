@@ -778,7 +778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.5283019, g: 0.01744394, b: 0.44697127, a: 1}
+  m_Color: {r: 0.4419628, g: 0.015686285, b: 0.5294118, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -803,6 +803,112 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 213254916}
   m_CullTransparentMesh: 1
+--- !u!1 &285870179
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 285870180}
+  - component: {fileID: 285870182}
+  - component: {fileID: 285870181}
+  m_Layer: 0
+  m_Name: fireFreeSpin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &285870180
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285870179}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.3, y: 162.3, z: -589.9875}
+  m_LocalScale: {x: 159.14206, y: 159.14206, z: 159.14206}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1796265308}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &285870181
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285870179}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: eba60ccc64a3d9f44a755a0dbdbc7d9a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!212 &285870182
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 285870179}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 21300000, guid: 148fb80e8a4fa7e44b24b794de387fb2, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 1.6, y: 1.6}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &291488551
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,8 +1008,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RowStopped: 0
   StoppedSlot: 
+  speed: 30
+  _endingSpeed: 100
   CheckMoneyResults: 0
-  _slotMachineController: {fileID: 1829795418}
 --- !u!1 &303769409
 GameObject:
   m_ObjectHideFlags: 0
@@ -1692,8 +1799,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RowStopped: 0
   StoppedSlot: 
+  speed: 30
+  _endingSpeed: 100
   CheckMoneyResults: 0
-  _slotMachineController: {fileID: 1829795418}
 --- !u!1 &559340169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2402,8 +2510,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 948404218}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0011, y: -0.0013, z: 0}
-  m_LocalScale: {x: 1.0021791, y: 1.000425, z: 1}
+  m_LocalPosition: {x: 0.00029, y: -0.000836, z: 0}
+  m_LocalScale: {x: 1.000313, y: 1.0010512, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 333139065}
@@ -2732,7 +2840,7 @@ GameObject:
   - component: {fileID: 1164792160}
   - component: {fileID: 1164792163}
   m_Layer: 3
-  m_Name: Particle System
+  m_Name: WinEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8346,8 +8454,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RowStopped: 0
   StoppedSlot: 
+  speed: 30
+  _endingSpeed: 100
   CheckMoneyResults: 0
-  _slotMachineController: {fileID: 1829795418}
 --- !u!1 &1563601625
 GameObject:
   m_ObjectHideFlags: 0
@@ -8685,6 +8794,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 20728983}
+  - {fileID: 285870180}
   m_Father: {fileID: 1713507166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9191,23 +9301,25 @@ MonoBehaviour:
     SecondValue: 61
     ThirdValue: 61
     PercentageOfProfit: 7
-    FreeSpin: 0
+    FreeSpin: 1
   - FirstValue: 202
     SecondValue: 202
     ThirdValue: 202
     PercentageOfProfit: 1.2
-    FreeSpin: 0
+    FreeSpin: 1
   - FirstValue: 341
     SecondValue: 341
     ThirdValue: 341
     PercentageOfProfit: 1.4
-    FreeSpin: 0
+    FreeSpin: 1
   _currentBetText: {fileID: 1739520088}
   _currentBetValue: 0
   _resultChecker: 1
   _inputChecker: {fileID: 1934658328}
   _slotWinSound: {fileID: 542666938}
   _slotWinParticle: {fileID: 1164792161}
+  _freeSpin: 0
+  _fireFreeSpin: {fileID: 285870179}
 --- !u!1 &1843960494
 GameObject:
   m_ObjectHideFlags: 0
