@@ -22,11 +22,11 @@ public class Row : MonoBehaviour
         CheckMoneyResults = false;
         RowStopped = false;
         _timeInterval = 0.005f;
-        _randomValue = Random.Range(200, 500);
+        _randomValue = Random.Range(100, 400);
         speed += _randomValue;
         while (speed > 0.1f)
         {
-            speed = speed / 1.03f;
+            speed = speed / 1.04f;
             transform.Translate(Vector2.up * Time.deltaTime * speed);
             if (transform.localPosition.y >= 479.6)
             {

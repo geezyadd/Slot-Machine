@@ -10,29 +10,29 @@ public class SlotMachineController : MonoBehaviour
     public static event Action SpinButtonPressed = delegate { };
 
     [SerializeField] private TMP_Text _prizeText;
-    [SerializeField] private TMP_Text _currentMoneyText;
-    [SerializeField] private float _currentMoneyValue;
+    //[SerializeField] private TMP_Text _currentMoneyText;
+    //[SerializeField] private float _currentMoneyValue;
     [SerializeField] private Row[] _rows;
     [SerializeField] private List<SlotCombinations> _slotCombinations;
     [SerializeField] private TMP_Text _currentBetText;
     [SerializeField] private int _currentBetValue;
-    private int _prizeValue;
     [SerializeField] private bool _resultChecker = true;
     [SerializeField] InputChecker _inputChecker;
     [SerializeField] private AudioSource _slotWinSound;
     [SerializeField] private ParticleSystem _slotWinParticle;
     [SerializeField] private bool _freeSpin = false;
     [SerializeField] private GameObject _fireFreeSpin;
+    [SerializeField] private MoneyCounter _moneyCounter;
     private void Start()
     {
         _slotWinParticle.Stop();
-       _currentMoneyValue = PlayerPrefs.GetFloat("_currentMoneyValue", _currentMoneyValue);
+       //_currentMoneyValue = PlayerPrefs.GetFloat("_currentMoneyValue", _currentMoneyValue);
     }
     private void Update()
     {
         RowMoveChecker();
         CurrentBetPriceUpdator();
-        CurrentMoneyUpdator();
+        //CurrentMoneyUpdator();
         FireFreeSpinChecker();
     }
 
@@ -41,18 +41,15 @@ public class SlotMachineController : MonoBehaviour
         if (!_rows[0].RowStopped || !_rows[1].RowStopped || !_rows[2].RowStopped)
         {
             _resultChecker = false;
-            _prizeValue = 0;
             _prizeText.enabled = false;
         }
         if (_rows[0].RowStopped && _rows[1].RowStopped && _rows[2].RowStopped && !_resultChecker) 
         {
-            //_slotWinParticle.Play();
-            //StartCoroutine(StopWinParticles());
             MoneyLoss();
             CheckMoneyProfit();
             _resultChecker = true;
             _prizeText.enabled = true;
-            _prizeText.text = "Prize: " + _prizeValue;
+            _prizeText.text = "Prize: " + (int)_moneyCounter.GetPrizeValue(); ;
         }
     }
 
@@ -87,14 +84,14 @@ public class SlotMachineController : MonoBehaviour
                 {
                     _slotWinParticle.Play();
                     StartCoroutine(StopWinParticles());
-                    ChangeMoney(Combination.PercentageOfProfit);
+                    _moneyCounter.ChangeMoney(Combination.PercentageOfProfit, _currentBetValue);
                     _freeSpin = false;
                 }
                 if(Combination.FreeSpin) 
                 {
                     _slotWinParticle.Play();
                     StartCoroutine(StopWinParticles());
-                    ChangeMoney(Combination.PercentageOfProfit);
+                    _moneyCounter.ChangeMoney(Combination.PercentageOfProfit, _currentBetValue);
                     _freeSpin = true;
                 }
             }
@@ -107,7 +104,7 @@ public class SlotMachineController : MonoBehaviour
             {
                 _slotWinParticle.Play();
                 StartCoroutine(StopWinParticles());
-                ChangeMoney(1.1f);
+                _moneyCounter.ChangeMoney(1.1f, _currentBetValue);
                 _freeSpin = false;
             }
         }
@@ -122,28 +119,28 @@ public class SlotMachineController : MonoBehaviour
         {
             if (!_freeSpin) 
             {
-                ChangeMoney(-1f);
+                _moneyCounter.ChangeMoney(-1f, _currentBetValue);
             }
             else if (_freeSpin)
             {
-                ChangeMoney(0f);
+                _moneyCounter.ChangeMoney(0f, _currentBetValue);
                 _freeSpin = false;
             }
 
         }
     }
 
-    private void ChangeMoney(float x) 
-    {
-        _currentMoneyValue += _currentBetValue * x;
-        _prizeValue = ((int)(_currentBetValue * x));
-    }
-    private void CurrentMoneyUpdator() 
-    {
-        _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
-        PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
-        PlayerPrefs.Save();
-    }
+    //private void ChangeMoney(float x) 
+    //{
+    //    _currentMoneyValue += _currentBetValue * x;
+    //    _prizeValue = ((int)(_currentBetValue * x));
+    //}
+    //private void CurrentMoneyUpdator() 
+    //{
+    //    _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
+    //    PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
+    //    PlayerPrefs.Save();
+    //}
     private IEnumerator StopWinParticles() 
     {
         yield return new WaitForSeconds(1.5f);
