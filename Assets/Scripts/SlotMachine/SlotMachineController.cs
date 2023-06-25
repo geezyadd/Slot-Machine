@@ -21,6 +21,8 @@ public class SlotMachineController : MonoBehaviour
     [SerializeField] InputChecker _inputChecker;
     [SerializeField] private AudioSource _slotWinSound;
     [SerializeField] private ParticleSystem _slotWinParticle;
+    [SerializeField] private bool _freeSpin = false;
+    [SerializeField] private GameObject _fireFreeSpin;
     private void Start()
     {
         _slotWinParticle.Stop();
@@ -31,6 +33,7 @@ public class SlotMachineController : MonoBehaviour
         RowMoveChecker();
         CurrentBetPriceUpdator();
         CurrentMoneyUpdator();
+        FireFreeSpinChecker();
     }
 
     private void RowMoveChecker()
@@ -43,9 +46,9 @@ public class SlotMachineController : MonoBehaviour
         }
         if (_rows[0].RowStopped && _rows[1].RowStopped && _rows[2].RowStopped && !_resultChecker) 
         {
-            _slotWinParticle.Play();
-            StartCoroutine(StopWinParticles());
-            CheckMoneyLoss();
+            //_slotWinParticle.Play();
+            //StartCoroutine(StopWinParticles());
+            MoneyLoss();
             CheckMoneyProfit();
             _resultChecker = true;
             _prizeText.enabled = true;
@@ -82,9 +85,18 @@ public class SlotMachineController : MonoBehaviour
             {
                 if (!Combination.FreeSpin) 
                 {
+                    _slotWinParticle.Play();
+                    StartCoroutine(StopWinParticles());
                     ChangeMoney(Combination.PercentageOfProfit);
+                    _freeSpin = false;
                 }
-                if(Combination.FreeSpin) { ChangeMoney(0f); }
+                if(Combination.FreeSpin) 
+                {
+                    _slotWinParticle.Play();
+                    StartCoroutine(StopWinParticles());
+                    ChangeMoney(Combination.PercentageOfProfit);
+                    _freeSpin = true;
+                }
             }
             else if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
                 && _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
@@ -93,18 +105,31 @@ public class SlotMachineController : MonoBehaviour
                 || _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
                 && _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString())
             {
+                _slotWinParticle.Play();
+                StartCoroutine(StopWinParticles());
                 ChangeMoney(1.1f);
+                _freeSpin = false;
             }
         }
     }
 
-    private void CheckMoneyLoss() 
+    private void MoneyLoss() 
     {
+
         if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot != _rows[1].gameObject.GetComponent<Row>().StoppedSlot
-                && _rows[1].gameObject.GetComponent<Row>().StoppedSlot != _rows[2].gameObject.GetComponent<Row>().StoppedSlot
-                && _rows[2].gameObject.GetComponent<Row>().StoppedSlot != _rows[0].gameObject.GetComponent<Row>().StoppedSlot)
+               && _rows[1].gameObject.GetComponent<Row>().StoppedSlot != _rows[2].gameObject.GetComponent<Row>().StoppedSlot
+               && _rows[2].gameObject.GetComponent<Row>().StoppedSlot != _rows[0].gameObject.GetComponent<Row>().StoppedSlot)
         {
-            ChangeMoney(-1f);
+            if (!_freeSpin) 
+            {
+                ChangeMoney(-1f);
+            }
+            else if (_freeSpin)
+            {
+                ChangeMoney(0f);
+                _freeSpin = false;
+            }
+
         }
     }
 
@@ -113,7 +138,6 @@ public class SlotMachineController : MonoBehaviour
         _currentMoneyValue += _currentBetValue * x;
         _prizeValue = ((int)(_currentBetValue * x));
     }
-    
     private void CurrentMoneyUpdator() 
     {
         _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
@@ -125,6 +149,10 @@ public class SlotMachineController : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         _slotWinParticle.Stop();
     }
-
+    private void FireFreeSpinChecker()
+    {
+        if(_freeSpin == true) { _fireFreeSpin.gameObject.SetActive(true); }
+        else if (_freeSpin == false) { _fireFreeSpin.gameObject.SetActive(false); }
+    }
 
 }

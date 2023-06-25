@@ -6,13 +6,10 @@ using UnityEngine.UI;
 public class InputChecker : MonoBehaviour
 {
     [SerializeField] private Button _spinButton;
-
     [SerializeField] private List<BetsDescriptor> _bets;
-
     [SerializeField] private int _currentBet;
     [SerializeField] private SlotMachineController _slotMachineController;
-
-    private bool _spinButtonPressed = false;
+    public int GetCurrentButtonPrice() { return _currentBet; }
     private void Awake()
     {
         _spinButton.onClick.AddListener(_slotMachineController.SpinButtonPress);
@@ -32,8 +29,5 @@ public class InputChecker : MonoBehaviour
     {
         _currentBet = BetButtonDescriptor.BetPrice;
     }
-    public int GetCurrentButtonPrice() { return _currentBet; }
-
-    
 
 }

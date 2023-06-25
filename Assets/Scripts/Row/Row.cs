@@ -12,18 +12,17 @@ public class Row : MonoBehaviour
     private float _timeInterval;
     public bool RowStopped;
     public string StoppedSlot;
-    private float speed = 30f;
+    [SerializeField] private float speed;
     private int _StopPositionValue;
     private bool _endingSpin;
-    private float _endingSpeed = 100f;
+    [SerializeField] private float _endingSpeed;
     public bool CheckMoneyResults = false;
-    [SerializeField] private SlotMachineController _slotMachineController;
-    public IEnumerator Spin()
+    private IEnumerator Spin()
     {
         CheckMoneyResults = false;
         RowStopped = false;
         _timeInterval = 0.005f;
-        _randomValue = Random.Range(50, 200);
+        _randomValue = Random.Range(200, 500);
         speed += _randomValue;
         while (speed > 0.1f)
         {
@@ -38,7 +37,6 @@ public class Row : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
         _endingSpin = true;
         RowStopped = true;
-        //Viravnivanie();
     }
 
     private void Start()
@@ -46,14 +44,7 @@ public class Row : MonoBehaviour
         RowStopped = true;
         SlotMachineController.SpinButtonPressed += StartRotation;
     }
-   
-    private void Viravnivanie() 
-    {
-        Debug.Log(SlotStopPosition());
-        _endingSpin = true;
-        RowStopped = true;
-    }
-
+ 
     private void FixedUpdate()
     {
         if(_endingSpin) 
@@ -73,8 +64,6 @@ public class Row : MonoBehaviour
         Dictionary<int, float> _slotDistance = new Dictionary<int, float>();
         foreach (int i in Enum.GetValues(typeof(SlotValue)))
         {
-
-           // Debug.Log("значение" + i + "растояние" + Math.Abs(transform.localPosition.y - i));
             bool keyExists = _slotDistance.ContainsKey(i);
             if (keyExists)
             {
