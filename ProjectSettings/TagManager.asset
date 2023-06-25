@@ -8,7 +8,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ParticleSystem
   - Water
   - UI
   - 
@@ -40,4 +40,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: SlotMachine
+    uniqueID: 3279237603
+    locked: 0
+  - name: ParticleSystem
+    uniqueID: 304133857
     locked: 0

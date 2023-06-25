@@ -19,9 +19,11 @@ public class SlotMachineController : MonoBehaviour
     private int _prizeValue;
     [SerializeField] private bool _resultChecker = true;
     [SerializeField] InputChecker _inputChecker;
-
+    [SerializeField] private AudioSource _slotWinSound;
+    [SerializeField] private ParticleSystem _slotWinParticle;
     private void Start()
     {
+        _slotWinParticle.Stop();
        _currentMoneyValue = PlayerPrefs.GetFloat("_currentMoneyValue", _currentMoneyValue);
     }
     private void Update()
@@ -41,6 +43,8 @@ public class SlotMachineController : MonoBehaviour
         }
         if (_rows[0].RowStopped && _rows[1].RowStopped && _rows[2].RowStopped && !_resultChecker) 
         {
+            _slotWinParticle.Play();
+            StartCoroutine(StopWinParticles());
             CheckMoneyLoss();
             CheckMoneyProfit();
             _resultChecker = true;
@@ -69,7 +73,8 @@ public class SlotMachineController : MonoBehaviour
 
     private void CheckMoneyProfit() 
     {
-        foreach(SlotCombinations Combination in _slotCombinations) 
+        _slotWinSound.Play();
+        foreach (SlotCombinations Combination in _slotCombinations) 
         {
             if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
                 && _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
@@ -81,7 +86,7 @@ public class SlotMachineController : MonoBehaviour
                 }
                 if(Combination.FreeSpin) { ChangeMoney(0f); }
             }
-            if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
+            else if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
                 && _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
                 || _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString()
                 && _rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
@@ -114,6 +119,11 @@ public class SlotMachineController : MonoBehaviour
         _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
         PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
         PlayerPrefs.Save();
+    }
+    private IEnumerator StopWinParticles() 
+    {
+        yield return new WaitForSeconds(1.5f);
+        _slotWinParticle.Stop();
     }
 
 

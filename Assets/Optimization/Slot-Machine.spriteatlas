@@ -1,0 +1,79 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Slot-Machine
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 0
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: 4d5a5d5b6bdea3d458ff812102ff89f3, type: 3}
+    - {fileID: 2800000, guid: e0e263452e39b7c408836863819df091, type: 3}
+    - {fileID: 21300000, guid: e8c6f9782e431f744a6c1f519bde5b08, type: 3}
+    - {fileID: 2800000, guid: 827e735bcc8775d48aa9f545fcc6c51c, type: 3}
+    - {fileID: 2800000, guid: e8c6f9782e431f744a6c1f519bde5b08, type: 3}
+    - {fileID: 102900000, guid: f0c462d47f7193d4495a57a01e2fc7b7, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 27e70ef06b370e2429c2f722d1d2b798, type: 3}
+  - {fileID: 21300000, guid: 06c680d38e2416543ac613bbd1562a9d, type: 3}
+  - {fileID: 21300000, guid: 2cec7164e69d42340aa32bd0578b08d3, type: 3}
+  - {fileID: 21300000, guid: 365d3a0509c8a464dbd44886575ac9a3, type: 3}
+  - {fileID: 21300000, guid: e0e263452e39b7c408836863819df091, type: 3}
+  - {fileID: 21300000, guid: d56bd395726a09248bd82feba5ad4915, type: 3}
+  - {fileID: 21300000, guid: e8c6f9782e431f744a6c1f519bde5b08, type: 3}
+  - {fileID: 21300000, guid: 524af2a98c1a6fa42b3f462cadac8df0, type: 3}
+  - {fileID: 21300000, guid: 5598632bfeb05564e925592407ef6bba, type: 3}
+  - {fileID: 21300000, guid: 827e735bcc8775d48aa9f545fcc6c51c, type: 3}
+  - {fileID: 21300000, guid: 4d5a5d5b6bdea3d458ff812102ff89f3, type: 3}
+  - {fileID: 21300000, guid: 3e5244fc794a60e4f905a04a05e21eb6, type: 3}
+  - {fileID: 21300000, guid: 148fb80e8a4fa7e44b24b794de387fb2, type: 3}
+  - {fileID: 21300000, guid: b2c4902fb99b02744a90395f4cac17f5, type: 3}
+  - {fileID: 21300000, guid: a91f4d5f3f5fdec49b086944bba07607, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - fire_04
+  - fire_05
+  - fire_08
+  - fire_06
+  - Row
+  - fire_10
+  - tablo
+  - fire_03
+  - fire_07
+  - window
+  - btn_empty_active
+  - fire_02
+  - fire_00
+  - fire_09
+  - fire_01
+  m_RenderDataMap: {}
+  m_Tag: Slot-Machine
+  m_IsVariant: 0

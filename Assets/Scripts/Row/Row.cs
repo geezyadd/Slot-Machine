@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor.PackageManager;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -110,7 +109,15 @@ public class Row : MonoBehaviour
 
     public void CheckSlotResults() 
     {
-        StoppedSlot = Enum.GetName(typeof(SlotValue), SlotStopPosition());
+        if(Enum.GetName(typeof(SlotValue), SlotStopPosition()) == "Diamond2") 
+        {
+            StoppedSlot = "Diamond";
+        }
+        else
+        {
+            StoppedSlot = Enum.GetName(typeof(SlotValue), SlotStopPosition());
+        }
+        
         CheckMoneyResults = true;
     }
 }
