@@ -8,13 +8,11 @@ public class MoneyCounter : MonoBehaviour
     [SerializeField] private float _currentMoneyValue;
     [SerializeField] private int _prizeValue;
     [SerializeField] private TMP_Text _currentMoneyText;
-    private void Update()
-    {
-        CurrentMoneyUpdator();
-    }
+  
     private void Start()
     {
         _currentMoneyValue = PlayerPrefs.GetFloat("_currentMoneyValue", _currentMoneyValue);
+        CurrentMoneyUpdator();
     }
     private void CurrentMoneyUpdator()
     {
@@ -25,6 +23,7 @@ public class MoneyCounter : MonoBehaviour
         _currentMoneyValue += CurrentBetValue * x;
         _prizeValue = ((int)(CurrentBetValue * x));
         SaveMoney();
+        CurrentMoneyUpdator();
     }
     private void SaveMoney() 
     {
