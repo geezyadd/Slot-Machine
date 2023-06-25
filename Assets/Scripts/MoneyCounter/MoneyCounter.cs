@@ -19,13 +19,17 @@ public class MoneyCounter : MonoBehaviour
     private void CurrentMoneyUpdator()
     {
         _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
-        PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
-        PlayerPrefs.Save();
     }
     public void ChangeMoney(float x, int CurrentBetValue)
     {
         _currentMoneyValue += CurrentBetValue * x;
         _prizeValue = ((int)(CurrentBetValue * x));
+        SaveMoney();
+    }
+    private void SaveMoney() 
+    {
+        PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
+        PlayerPrefs.Save();
     }
     public float GetCurrentMoneyValue() { return _currentMoneyValue; }
     public float GetPrizeValue() { return _prizeValue; }

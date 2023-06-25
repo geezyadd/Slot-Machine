@@ -10,8 +10,6 @@ public class SlotMachineController : MonoBehaviour
     public static event Action SpinButtonPressed = delegate { };
 
     [SerializeField] private TMP_Text _prizeText;
-    //[SerializeField] private TMP_Text _currentMoneyText;
-    //[SerializeField] private float _currentMoneyValue;
     [SerializeField] private Row[] _rows;
     [SerializeField] private List<SlotCombinations> _slotCombinations;
     [SerializeField] private TMP_Text _currentBetText;
@@ -26,13 +24,11 @@ public class SlotMachineController : MonoBehaviour
     private void Start()
     {
         _slotWinParticle.Stop();
-       //_currentMoneyValue = PlayerPrefs.GetFloat("_currentMoneyValue", _currentMoneyValue);
     }
     private void Update()
     {
         RowMoveChecker();
         CurrentBetPriceUpdator();
-        //CurrentMoneyUpdator();
         FireFreeSpinChecker();
     }
 
@@ -95,12 +91,15 @@ public class SlotMachineController : MonoBehaviour
                     _freeSpin = true;
                 }
             }
-            else if (_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
+            else if ((_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
                 && _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
                 || _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString()
                 && _rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
                 || _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
-                && _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString())
+                && _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString()) 
+                && !(_rows[0].gameObject.GetComponent<Row>().StoppedSlot == Combination.FirstValue.ToString()
+                && _rows[1].gameObject.GetComponent<Row>().StoppedSlot == Combination.SecondValue.ToString()
+                && _rows[2].gameObject.GetComponent<Row>().StoppedSlot == Combination.ThirdValue.ToString()))
             {
                 _slotWinParticle.Play();
                 StartCoroutine(StopWinParticles());
@@ -129,18 +128,6 @@ public class SlotMachineController : MonoBehaviour
 
         }
     }
-
-    //private void ChangeMoney(float x) 
-    //{
-    //    _currentMoneyValue += _currentBetValue * x;
-    //    _prizeValue = ((int)(_currentBetValue * x));
-    //}
-    //private void CurrentMoneyUpdator() 
-    //{
-    //    _currentMoneyText.text = "Current money: " + _currentMoneyValue + "$";
-    //    PlayerPrefs.SetFloat("_currentMoneyValue", _currentMoneyValue);
-    //    PlayerPrefs.Save();
-    //}
     private IEnumerator StopWinParticles() 
     {
         yield return new WaitForSeconds(1.5f);
